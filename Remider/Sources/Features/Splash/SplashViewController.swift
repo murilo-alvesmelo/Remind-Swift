@@ -14,15 +14,22 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
-        self.view.backgroundColor = Colors.redBase
-        setup()
+        
+        setupUI()
     }
     
-    private func setup(){
+    private func setupUI(){
         self.view.addSubview(contentView)
-        
+        self.navigationController?.navigationBar.isHidden = true
+        self.view.backgroundColor = Colors.redBase
         setupConstraints()
+        setupGesture()
+    }
+    
+    
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     private func setupConstraints() {
@@ -34,5 +41,16 @@ class SplashViewController: UIViewController {
         ])
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    @objc
+    private func showLoginBottomSheet () {
+        let loginBottomSheet = LoginBottomSheetViewController()
+        
+        loginBottomSheet.modalPresentationStyle = .overCurrentContext
+        loginBottomSheet.modalTransitionStyle = .crossDissolve
+        self.present(loginBottomSheet, animated: false, completion: {
+            loginBottomSheet.animateShow()
+        })
     }
 }

@@ -10,6 +10,15 @@ import UIKit
 
 class SplashView: UIView {
     
+    init(){
+        super.init(frame: .zero)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let logoImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "Logo")
@@ -27,14 +36,6 @@ class SplashView: UIView {
         return label
     }()
     
-    init(){
-        super.init(frame: .zero)
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private func setupUI(){
 
@@ -48,7 +49,7 @@ class SplashView: UIView {
         NSLayoutConstraint.activate([
             
             titleLogoLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: Metrics.medium),
-            titleLogoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -Metrics.medium),
+            titleLogoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -Metrics.huge),
             
             logoImageView.trailingAnchor.constraint(equalTo: titleLogoLabel.leadingAnchor, constant: -Metrics.tiny),
             logoImageView.bottomAnchor.constraint(equalTo: titleLogoLabel.bottomAnchor),
