@@ -12,6 +12,10 @@
 		E7BBD0222D9B7BD0007E9A00 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BBD0212D9B7BD0007E9A00 /* Colors.swift */; };
 		E7BBD0252D9B82B2007E9A00 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BBD0242D9B82B2007E9A00 /* Text.swift */; };
 		E7BBD0282D9B83FC007E9A00 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BBD0272D9B83FC007E9A00 /* Metrics.swift */; };
+		E7BBD02B2D9CBF1B007E9A00 /* LoginBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BBD02A2D9CBF1B007E9A00 /* LoginBottomSheetViewController.swift */; };
+		E7BBD02D2D9CC021007E9A00 /* LoginBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BBD02C2D9CC021007E9A00 /* LoginBottomSheetView.swift */; };
+		E7BBD0312D9E1968007E9A00 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7BBD0302D9E1968007E9A00 /* Localizable.strings */; };
+		E7BBD0352D9E1BF4007E9A00 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BBD0342D9E1BF4007E9A00 /* String.swift */; };
 		E7C852CA2D921399003338E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C852C92D921399003338E3 /* AppDelegate.swift */; };
 		E7C852CC2D921399003338E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C852CB2D921399003338E3 /* SceneDelegate.swift */; };
 		E7C852D32D92139B003338E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C852D22D92139B003338E3 /* Assets.xcassets */; };
@@ -23,6 +27,10 @@
 		E7BBD0212D9B7BD0007E9A00 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E7BBD0242D9B82B2007E9A00 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		E7BBD0272D9B83FC007E9A00 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		E7BBD02A2D9CBF1B007E9A00 /* LoginBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBottomSheetViewController.swift; sourceTree = "<group>"; };
+		E7BBD02C2D9CC021007E9A00 /* LoginBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBottomSheetView.swift; sourceTree = "<group>"; };
+		E7BBD0302D9E1968007E9A00 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		E7BBD0342D9E1BF4007E9A00 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		E7C852C62D921399003338E3 /* Remider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C852C92D921399003338E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7C852CB2D921399003338E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +60,8 @@
 		E7BBD0192D963D94007E9A00 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				E7BBD0332D9E1BE1007E9A00 /* Extensions */,
+				E7BBD0292D9CBF08007E9A00 /* LoginBottomSheet */,
 				E7BBD01F2D9B7BAB007E9A00 /* Constants  */,
 				E7BBD01A2D963DA5007E9A00 /* Splash */,
 			);
@@ -101,6 +111,32 @@
 			path = Metrics;
 			sourceTree = "<group>";
 		};
+		E7BBD0292D9CBF08007E9A00 /* LoginBottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				E7BBD02A2D9CBF1B007E9A00 /* LoginBottomSheetViewController.swift */,
+				E7BBD02C2D9CC021007E9A00 /* LoginBottomSheetView.swift */,
+			);
+			path = LoginBottomSheet;
+			sourceTree = "<group>";
+		};
+		E7BBD02F2D9E1947007E9A00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E7C852D22D92139B003338E3 /* Assets.xcassets */,
+				E7BBD0302D9E1968007E9A00 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E7BBD0332D9E1BE1007E9A00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7BBD0342D9E1BF4007E9A00 /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E7C852BD2D921399003338E3 = {
 			isa = PBXGroup;
 			children = (
@@ -120,10 +156,10 @@
 		E7C852C82D921399003338E3 /* Remider */ = {
 			isa = PBXGroup;
 			children = (
+				E7BBD02F2D9E1947007E9A00 /* Resources */,
 				E7BBD0182D963D8B007E9A00 /* Sources */,
 				E7C852C92D921399003338E3 /* AppDelegate.swift */,
 				E7C852CB2D921399003338E3 /* SceneDelegate.swift */,
-				E7C852D22D92139B003338E3 /* Assets.xcassets */,
 				E7C852D72D92139B003338E3 /* Info.plist */,
 			);
 			path = Remider;
@@ -188,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7C852D32D92139B003338E3 /* Assets.xcassets in Resources */,
+				E7BBD0312D9E1968007E9A00 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,9 +237,12 @@
 			files = (
 				E7BBD01C2D963DB8007E9A00 /* SplashViewController.swift in Sources */,
 				E7BBD0222D9B7BD0007E9A00 /* Colors.swift in Sources */,
+				E7BBD0352D9E1BF4007E9A00 /* String.swift in Sources */,
 				E7BBD01E2D964436007E9A00 /* SplashView.swift in Sources */,
 				E7C852CA2D921399003338E3 /* AppDelegate.swift in Sources */,
 				E7BBD0282D9B83FC007E9A00 /* Metrics.swift in Sources */,
+				E7BBD02D2D9CC021007E9A00 /* LoginBottomSheetView.swift in Sources */,
+				E7BBD02B2D9CBF1B007E9A00 /* LoginBottomSheetViewController.swift in Sources */,
 				E7BBD0252D9B82B2007E9A00 /* Text.swift in Sources */,
 				E7C852CC2D921399003338E3 /* SceneDelegate.swift in Sources */,
 			);
