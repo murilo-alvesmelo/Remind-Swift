@@ -15,7 +15,7 @@ class LoginBottomSheetViewController:  UIViewController {
     public weak var flowDelegate: LoginBottomSheetFlowDelegate?
     
     
-    init(delegate: LoginBottomSheetFlowDelegate){
+    init(flowDelegate: LoginBottomSheetFlowDelegate){
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,7 +72,7 @@ class LoginBottomSheetViewController:  UIViewController {
     
     private func bindViewModel(){
         loginModel.succesResult = {[weak self] in
-            self?.delegate?.navigateToHome()
+            self?.flowDelegate?.navigateToHome()
             self?.dismiss(animated: false)
         }
     }
