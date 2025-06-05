@@ -25,7 +25,8 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        startBreathingAnimation()
+//        decideNavigationFlow()
         setupUI()
     }
     
@@ -37,6 +38,14 @@ class SplashViewController: UIViewController {
         setupGesture()
     }
     
+    
+    private func decideNavigationFlow(){
+        if let user = UserDefaultManager.loadUser(), user.isUserSaved{
+            flowDelegate?.navigateToHomeUserSaved()
+        } else {
+            showLoginBottomSheet()
+        }
+    }
     
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
@@ -57,5 +66,19 @@ class SplashViewController: UIViewController {
     @objc
     private func showLoginBottomSheet () {
         self.flowDelegate?.openLoginBottomSheet()
+    }
+}
+
+
+//MARK: - Animantions
+extension SplashViewController {
+    private func startBreathingAnimation(){
+        UIView.animate(withDuration: 0.8,
+                       delay: 0.0,
+                       animations: {
+            self.contentView.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: {_ in
+            self.decideNavigationFlow()
+        })
     }
 }

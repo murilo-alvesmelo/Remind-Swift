@@ -49,6 +49,7 @@ class LoginBottomSheetView: UIView {
         emailField.borderStyle = .roundedRect
         emailField.layer.cornerRadius = Metrics.tiny
         emailField.translatesAutoresizingMaskIntoConstraints = false
+        emailField.autocapitalizationType = .none
         
         return emailField
     }()

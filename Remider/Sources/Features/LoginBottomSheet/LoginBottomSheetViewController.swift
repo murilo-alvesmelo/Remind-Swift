@@ -43,6 +43,26 @@ class LoginBottomSheetViewController:  UIViewController {
         setupConstraints()
     }
     
+    private func presentSaveLoginAlert(email: String) {
+        let alertController = UIAlertController(title: "Salvar Acesso",
+                                                message: "Deseja se manter conectado?",
+                                                preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Salvar", 
+                                       style: .default){ _ in
+            let user = User(email: email, isUserSaved: true)
+            UserDefaultManager.saveUser(user: user)
+            self.flowDelegate?.navigateToHome()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Não", style: .cancel){_ in
+            self.flowDelegate?.navigateToHome()
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
+    }
+    
     private func setupGesture() {
         //
     }
@@ -73,9 +93,8 @@ class LoginBottomSheetViewController:  UIViewController {
     }
     
     private func bindViewModel(){
-        loginModel.succesResult = {[weak self] in
-            self?.flowDelegate?.navigateToHome()
-            self?.dismiss(animated: false)
+        loginModel.succesResult = {[weak self] usernameLogin in
+            self?.presentSaveLoginAlert(email: usernameLogin)
         }
     }
 }
@@ -83,6 +102,7 @@ class LoginBottomSheetViewController:  UIViewController {
 /* MARK: - SendLoginData */
 extension LoginBottomSheetViewController: LoginBottomSheetViewDelegate{
     func sendLoginData(user: String, password: String) {
-        loginModel.doAuth(user: user, password: password)
+        loginModel.doAuth(usernameLogin: user, password: password)
     }
 }
+

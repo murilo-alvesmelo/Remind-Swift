@@ -29,6 +29,7 @@ class ReminderCoordinator {
 //MARK: - Login
 extension ReminderCoordinator: LoginBottomSheetFlowDelegate{
     func navigateToHome() {
+        self.navigationController?.dismiss(animated: false)
         let viewController = UIViewController()
         viewController.view.backgroundColor = .red
         
@@ -45,5 +46,12 @@ extension ReminderCoordinator: SplashFlowDelegate {
         navigationController?.present(loginBottomSheet, animated: false, completion: {
             loginBottomSheet.animateShow()
         })
+    }
+    func navigateToHomeUserSaved() {
+        self.navigationController?.dismiss(animated: false)
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .red
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
