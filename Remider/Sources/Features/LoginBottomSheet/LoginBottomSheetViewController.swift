@@ -63,6 +63,18 @@ class LoginBottomSheetViewController:  UIViewController {
         self.present(alertController, animated: true)
     }
     
+    private func presentErrorAlert(message: String) {
+        let alertController = UIAlertController(title: "Ops!",
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: "Tentar novamente",
+                                        style: .default)
+        
+        alertController.addAction(retryAction)
+        self.present(alertController, animated: true)
+    }
+    
     private func setupGesture() {
         //
     }
@@ -95,6 +107,10 @@ class LoginBottomSheetViewController:  UIViewController {
     private func bindViewModel(){
         loginModel.succesResult = {[weak self] usernameLogin in
             self?.presentSaveLoginAlert(email: usernameLogin)
+        }
+        
+        loginModel.errorResult = {[weak self] errorMessage in
+            self?.presentErrorAlert(message: errorMessage)
         }
     }
 }
