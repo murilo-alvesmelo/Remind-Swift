@@ -26,15 +26,31 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar(){
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.hidesBackButton = true
+        let logoutButton = UIBarButtonItem(image: UIImage(named: "log-out"),
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(logoutAction))
+        logoutButton.tintColor = Colors.redBase
+        navigationItem.rightBarButtonItem = logoutButton
     }
     
     private func setupUI(){
         self.view.addSubview(contentView)
-        setupContentViewToBounds(contentView: contentView)
         setupConstraints()
     }
     
     private func setupConstraints(){
-        
+        setupContentViewToBounds(contentView: contentView)
+    }
+    
+    @objc
+    private func logoutAction(){
+        print("Função sayHello foi chamada!")
     }
 }
