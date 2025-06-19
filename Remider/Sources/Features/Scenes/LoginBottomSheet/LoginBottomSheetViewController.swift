@@ -39,7 +39,6 @@ class LoginBottomSheetViewController:  UIViewController {
     private func setupUI(){
         self.view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
         setupConstraints()
     }
     
