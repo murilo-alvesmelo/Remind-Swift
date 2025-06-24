@@ -28,12 +28,15 @@ class LoginBottomSheetViewController:  UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         contentView.delegate = self
         setupUI()
         setupGesture()
         handlePanGesture()
         bindViewModel()
+        setupTapToDismissKeyboard()
     }
     
     private func setupUI(){
@@ -82,6 +85,12 @@ class LoginBottomSheetViewController:  UIViewController {
         //
     }
     
+    private func setupTapToDismissKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     public func animateShow(completion: (()-> Void)? = nil) {
         self.view.layoutIfNeeded()
         contentView.transform = CGAffineTransform(translationX: 0, y: contentView.frame.height)
@@ -111,6 +120,20 @@ class LoginBottomSheetViewController:  UIViewController {
         loginModel.errorResult = {[weak self] errorMessage in
             self?.presentErrorAlert(message: errorMessage)
         }
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let keyboardHeight = keyboardFrame.height
+        self.view.frame.origin.y = -keyboardHeight / 2
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

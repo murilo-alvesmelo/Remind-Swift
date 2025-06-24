@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
     
     private func setupUI(){
         self.view.addSubview(contentView)
+        contentView.delegate = self
         setupConstraints()
     }
     
@@ -51,6 +52,37 @@ class HomeViewController: UIViewController {
     
     @objc
     private func logoutAction(){
-        print("Função sayHello foi chamada!")
+        UserDefaultManager.removeUser()
+        self.flowDelagate?.logout()
+    }
+}
+
+extension HomeViewController: HomeViewDelegate {
+    func didTapProfileImage() {
+        selectProfileImage()
+    }
+}
+
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func selectProfileImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editImage = info[.editedImage] as? UIImage {
+            contentView.profileImage.image = editImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            contentView.profileImage.image = originalImage
+        }
+        
+        dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }

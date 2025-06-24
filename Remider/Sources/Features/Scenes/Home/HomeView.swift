@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class HomeView: UIView {
+    weak public var delegate: HomeViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupUI()
@@ -28,6 +30,7 @@ class HomeView: UIView {
         addSubview(contentBackground)
         contentBackground.addSubview(feedbackButton)
         setupConstraints()
+        setupImageGesture()
     }
     
     private let profileTop: UIView = {
@@ -46,12 +49,14 @@ class HomeView: UIView {
         return view
     }()
     
-    private let profileImage: UIImageView = {
+    public let profileImage: UIImageView = {
         let imageView = UIImageView()
         
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = Metrics.huge
+        imageView.isUserInteractionEnabled = true
+        imageView.layer.cornerRadius = Metrics.small
+        imageView.image = UIImage(named: "user")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -114,5 +119,17 @@ class HomeView: UIView {
             feedbackButton.heightAnchor.constraint(equalToConstant: Metrics.xl)
             
         ])
+    }
+    
+    private func setupImageGesture(){
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                          action: #selector(profileImageTapped))
+        
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc
+    private func profileImageTapped(){
+        delegate?.didTapProfileImage()
     }
 }

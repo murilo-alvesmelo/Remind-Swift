@@ -26,7 +26,6 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startBreathingAnimation()
-//        decideNavigationFlow()
         setupUI()
     }
     

@@ -24,6 +24,14 @@ class ReminderCoordinator: HomeFlowDelegate {
         self.navigationController = UINavigationController(rootViewController: startViewController)
         return navigationController
     }
+    
+    func logout() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func navigateToRecipes() {
+        //
+    }
 }
 
 //MARK: - Login
