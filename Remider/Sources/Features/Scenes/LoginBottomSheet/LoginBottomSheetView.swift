@@ -26,6 +26,7 @@ class LoginBottomSheetView: UIView {
         
         label.text = "login.welcome.title".localizes
         label.font = Typography.subheading
+        label.textColor = Colors.gray100
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -36,7 +37,8 @@ class LoginBottomSheetView: UIView {
         let label = UILabel()
         
         label.text = "login.email.label".localizes
-        label.font = Typography.input
+        label.font = Typography.label
+        label.textColor = Colors.gray100
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -45,10 +47,19 @@ class LoginBottomSheetView: UIView {
     private let emailTextField: UITextField = {
         let emailField = UITextField()
         
-        emailField.placeholder = "login.email.placeholder".localizes
+        emailField.attributedPlaceholder = NSAttributedString(
+            string: "login.email.placeholder".localizes,
+            attributes: [.foregroundColor: Colors.gray200,
+                         .font: Typography.input]
+        )
+        emailField.textColor = Colors.gray200
         emailField.borderStyle = .roundedRect
+        emailField.backgroundColor = Colors.gray800
+        emailField.layer.borderColor = Colors.gray400.cgColor
+        emailField.layer.borderWidth = 1
         emailField.layer.cornerRadius = Metrics.tiny
         emailField.translatesAutoresizingMaskIntoConstraints = false
+        emailField.autocapitalizationType = .none
         
         return emailField
     }()
@@ -58,17 +69,25 @@ class LoginBottomSheetView: UIView {
         let label = UILabel()
         
         label.text = "login.password.label".localizes
-        label.font = Typography.input
+        label.font = Typography.label
+        label.textColor = Colors.gray100
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
     private let passwordField: UITextField = {
        let passwordField = UITextField()
         
-        passwordField.placeholder = "login.password.label".localizes
+        passwordField.attributedPlaceholder = NSAttributedString(
+            string: "login.password.label".localizes,
+            attributes: [.foregroundColor: Colors.gray200,
+                         .font: Typography.input]
+        )
+        passwordField.textColor = Colors.gray200
         passwordField.borderStyle = .roundedRect
+        passwordField.backgroundColor = Colors.gray800
+        passwordField.layer.borderWidth = 1
+        passwordField.layer.borderColor = Colors.gray400.cgColor
         passwordField.isSecureTextEntry = true
         passwordField.layer.cornerRadius = Metrics.tiny
         passwordField.translatesAutoresizingMaskIntoConstraints = false

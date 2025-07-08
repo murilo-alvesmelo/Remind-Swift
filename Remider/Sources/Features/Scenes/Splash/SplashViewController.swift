@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 
 class SplashViewController: UIViewController {
-    let contentView = SplashView()
+    let contentView: SplashView
     public weak var flowDelegate: SplashFlowDelegate?
     
-    init(flowDelegate: SplashFlowDelegate? = nil) {
+    init(contentView: SplashView, 
+         flowDelegate: SplashFlowDelegate? = nil) {
+        self.contentView = contentView
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,7 +25,7 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        startBreathingAnimation()
         setupUI()
     }
     
@@ -31,29 +33,40 @@ class SplashViewController: UIViewController {
         self.view.addSubview(contentView)
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = Colors.redBase
-        setupConstraints()
+        setupContentViewToBounds(contentView: contentView)
         setupGesture()
     }
     
+    
+    private func decideNavigationFlow(){
+        if let user = UserDefaultManager.loadUser(), user.isUserSaved{
+            flowDelegate?.navigateToHomeUserSaved()
+        } else {
+            showLoginBottomSheet()
+        }
+    }
     
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: view.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     @objc
     private func showLoginBottomSheet () {
         self.flowDelegate?.openLoginBottomSheet()
+    }
+}
+
+
+//MARK: - Animantions
+extension SplashViewController {
+    private func startBreathingAnimation(){
+        UIView.animate(withDuration: 0.8,
+                       delay: 0.0,
+                       animations: {
+            self.contentView.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: {_ in
+            self.decideNavigationFlow()
+        })
     }
 }

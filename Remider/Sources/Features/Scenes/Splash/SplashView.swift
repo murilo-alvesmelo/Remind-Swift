@@ -19,7 +19,7 @@ class SplashView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let logoImageView: UIImageView = {
+    let logoImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "Logo")
         image.contentMode = .scaleAspectFill

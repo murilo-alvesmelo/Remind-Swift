@@ -8,28 +8,37 @@
 import Foundation
 import UIKit
 
-class ReminderCoordinator {
+class ReminderCoordinator: HomeFlowDelegate {
     //MARK: - Properties
     private var navigationController: UINavigationController?
+    private let viewControllerFactory: ViewControllersFactoryProtocol
     
     //MARK: - init
     public init(){
+        self.viewControllerFactory = ViewControllersFactory()
     }
     
     //MARK: - startFlow
     func start() -> UINavigationController? {
-        let startViewController = SplashViewController(flowDelegate: self)
+        let startViewController = viewControllerFactory.makeSplashViewController(flowDelegate: self)
         self.navigationController = UINavigationController(rootViewController: startViewController)
         return navigationController
+    }
+    
+    func logout() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func navigateToRecipes() {
+        //
     }
 }
 
 //MARK: - Login
-
 extension ReminderCoordinator: LoginBottomSheetFlowDelegate{
     func navigateToHome() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .red
+        self.navigationController?.dismiss(animated: false)
+        let viewController = viewControllerFactory.makeHomeViewController(flowDelegate: self)
         
         self.navigationController?.pushViewController(viewController, animated: true)
     }
@@ -38,11 +47,17 @@ extension ReminderCoordinator: LoginBottomSheetFlowDelegate{
 //MARK: - Splash
 extension ReminderCoordinator: SplashFlowDelegate {
     func openLoginBottomSheet(){
-        let loginBottomSheet = LoginBottomSheetViewController(flowDelegate: self)
+        let loginBottomSheet = viewControllerFactory.makeLoginBottomSheetViewController(flowDelegate: self)
         loginBottomSheet.modalPresentationStyle = .overCurrentContext
         loginBottomSheet.modalTransitionStyle = .crossDissolve
         navigationController?.present(loginBottomSheet, animated: false, completion: {
             loginBottomSheet.animateShow()
         })
+    }
+    func navigateToHomeUserSaved() {
+        self.navigationController?.dismiss(animated: false)
+        let viewController = viewControllerFactory.makeHomeViewController(flowDelegate: self)
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

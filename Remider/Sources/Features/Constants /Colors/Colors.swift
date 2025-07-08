@@ -22,4 +22,6 @@ public struct Colors {
     static let gray600 = UIColor(red: 215/255, green: 225/255, blue: 234/255, alpha: 1.0)
     static let gray700 = UIColor(red: 232/255, green: 238/255, blue: 243/255, alpha: 1.0)
     static let gray800 = UIColor(red: 248/255, green: 250/255, blue: 251/255, alpha: 1.0)
+    
+    
 }
