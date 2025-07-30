@@ -10,12 +10,14 @@ import UIKit
 
 class HomeViewController: UIViewController {
     let contentView: HomeView
+    let viewModel: HomeViewModel
     public weak var flowDelagate: HomeFlowDelegate?
     
     init(contentView: HomeView,
          flowDelagate: HomeFlowDelegate? = nil) {
         self.contentView = contentView
         self.flowDelagate = flowDelagate
+        self.viewModel = HomeViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,6 +29,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
+        checkForExistingData()
     }
     
     private func setupNavigationBar(){
@@ -54,6 +57,12 @@ class HomeViewController: UIViewController {
     private func logoutAction(){
         UserDefaultManager.removeUser()
         self.flowDelagate?.logout()
+    }
+    
+    private func checkForExistingData (){
+        if UserDefaultManager.loadUser() != nil{
+            contentView.nameTextField.text = UserDefaultManager.loadUserName()
+        }
     }
 }
 

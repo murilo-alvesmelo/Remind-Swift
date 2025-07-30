@@ -9,6 +9,21 @@ import Foundation
 
 class UserDefaultManager {
     private static let userKey = "userKey"
+    private static let userNameKey = "userName"
+    
+    static func saveUserName(name: String){
+        UserDefaults.standard.set(name, forKey: userNameKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func loadUserName() -> String? {
+        return UserDefaults.standard.string(forKey: userNameKey)
+    }
+    
+    static func removeUserName(){
+        UserDefaults.standard.removeObject(forKey: userNameKey)
+        UserDefaults.standard.synchronize()
+    }
     
     static func saveUser(user: User){
         let encoder = JSONEncoder()
