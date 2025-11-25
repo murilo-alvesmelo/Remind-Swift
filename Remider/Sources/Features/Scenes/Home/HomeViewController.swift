@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupActionForNewRecipe()
         setupNavigationBar()
         checkForExistingData()
     }
@@ -53,6 +54,11 @@ class HomeViewController: UIViewController {
         setupContentViewToBounds(contentView: contentView)
     }
     
+    private func setupActionForNewRecipe(){
+        contentView.newPrescriptionButton.tapAction = {[weak self] in
+            self?.didTapNewPrescriptionButton()
+        }
+    }
     @objc
     private func logoutAction(){
         UserDefaultManager.removeUser()
@@ -63,12 +69,19 @@ class HomeViewController: UIViewController {
         if UserDefaultManager.loadUser() != nil{
             contentView.nameTextField.text = UserDefaultManager.loadUserName()
         }
+        if let savedImage = UserDefaultManager.loadPhotoUser(){
+            contentView.profileImage.image = savedImage
+        }
     }
 }
 
 extension HomeViewController: HomeViewDelegate {
     func didTapProfileImage() {
         selectProfileImage()
+    }
+    
+    func didTapNewPrescriptionButton(){
+        self.flowDelagate?.navigateToRecipes()
     }
 }
 
@@ -84,8 +97,10 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editImage = info[.editedImage] as? UIImage {
             contentView.profileImage.image = editImage
+            UserDefaultManager.savePhotoUser(image: editImage)
         } else if let originalImage = info[.originalImage] as? UIImage {
             contentView.profileImage.image = originalImage
+            UserDefaultManager.savePhotoUser(image: originalImage)
         }
         
         dismiss(animated: true)
