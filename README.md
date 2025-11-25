@@ -9,3 +9,4 @@ Um app para te lembrar a tomar seu remedios, caso de estudo em swift utilizando 
 
 <img src="https://github.com/user-attachments/assets/3880d152-f6c2-406e-817e-5ba5c64db3b8" height="500"/>
 <img src="https://github.com/user-attachments/assets/f582c4b8-dd7b-4773-9f21-6e78009297df" height="500"/>
+<img src="https://github.com/user-attachments/assets/6458922c-4735-4873-bb08-b68669386744" height="500"/>
