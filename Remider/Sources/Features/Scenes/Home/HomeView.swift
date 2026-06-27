@@ -114,7 +114,7 @@ class HomeView: UIView {
             profileTop.topAnchor.constraint(equalTo: topAnchor),
             profileTop.leadingAnchor.constraint(equalTo: leadingAnchor),
             profileTop.trailingAnchor.constraint(equalTo: trailingAnchor),
-            profileTop.heightAnchor.constraint(equalToConstant: 230),
+            profileTop.heightAnchor.constraint(equalToConstant: Metrics.backgroundProfileSize),
             
             profileImage.topAnchor.constraint(equalTo: profileTop.topAnchor, constant: 60),
             profileImage.leadingAnchor.constraint(equalTo: profileTop.leadingAnchor, constant: Metrics.medium),

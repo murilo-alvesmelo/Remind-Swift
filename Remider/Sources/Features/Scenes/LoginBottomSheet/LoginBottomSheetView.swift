@@ -15,6 +15,7 @@ class LoginBottomSheetView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupUI()
+        setupDelegates()
     }
     
     required init?(coder: NSCoder) {
@@ -158,5 +159,17 @@ class LoginBottomSheetView: UIView {
         let user = emailTextField.text ?? ""
         let password = passwordField.text ?? ""
         delegate?.sendLoginData(user: user, password: password)
+    }
+    
+    private func setupDelegates(){
+        emailTextField.delegate = self
+        passwordField.delegate = self
+    }
+}
+
+extension LoginBottomSheetView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

@@ -34,6 +34,13 @@ class ReminderCoordinator: HomeFlowDelegate {
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.pushViewController(recipesViewController, animated: true)
     }
+    
+    func navigateToMyRecipes() {
+        let myRecipesViewController = viewControllerFactory.makeMyRecipesViewController(flowDelegate: self)
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.pushViewController(myRecipesViewController, animated: true)
+    }
+
 }
 
 //MARK: - Login
@@ -61,5 +68,19 @@ extension ReminderCoordinator: SplashFlowDelegate {
         let viewController = viewControllerFactory.makeHomeViewController(flowDelegate: self)
         
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension ReminderCoordinator: MyReceiptsFlowDelegate {
+    func goToNewRecipes() {
+        self.navigateToRecipes()
+    }
+    
+    func popScreen() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func goToNewReceipt() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

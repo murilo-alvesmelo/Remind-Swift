@@ -97,7 +97,7 @@ class ButtonHomeView: UIView{
             
             descritionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.small),
             descritionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descritionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metrics.medium),
+            descritionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
             descritionLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: Metrics.medium),
             
             arrowImageView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),

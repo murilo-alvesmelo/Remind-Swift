@@ -58,6 +58,10 @@ class HomeViewController: UIViewController {
         contentView.newPrescriptionButton.tapAction = {[weak self] in
             self?.didTapNewPrescriptionButton()
         }
+        
+        contentView.myPrescriptionButtons.tapAction = {[weak self] in
+            self?.didTapMyPrescriptions()
+        }
     }
     @objc
     private func logoutAction(){
@@ -82,6 +86,10 @@ extension HomeViewController: HomeViewDelegate {
     
     func didTapNewPrescriptionButton(){
         self.flowDelagate?.navigateToRecipes()
+    }
+    
+    func didTapMyPrescriptions() {
+        self.flowDelagate?.navigateToMyRecipes()
     }
 }
 
